@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\")",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Start-Process \"http://localhost:3000\")",
+      "PowerShell(if \\($env:ANTHROPIC_API_KEY\\) { Write-Host \"Key found: $\\($env:ANTHROPIC_API_KEY.Substring\\(0,8\\)\\)...\" } else { Write-Host \"Not set\" })",
+      "PowerShell(pip *)",
+      "PowerShell(pg_isready *)",
+      "PowerShell(python -m uvicorn --version 2>&1)",
+      "PowerShell(Start-Process \"http://localhost:3000/feedback\")",
+      "PowerShell($env:PYTHONIOENCODING = \"utf-8\"; cd \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\\\\ai-product-manager\"; python demo_pipeline.py)",
+      "PowerShell(Start-Process \"http://localhost:3000/insights\")",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3 2>&1 | Select-Object StatusCode, StatusDescription)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/health\" -UseBasicParsing | Select-Object -ExpandProperty Content)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 5 | Select-Object StatusCode)",
+      "PowerShell(netstat *)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://127.0.0.1:3000\" -UseBasicParsing -TimeoutSec 5 | Select-Object StatusCode)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/api/v1/feedback\" -UseBasicParsing | Select-Object -ExpandProperty Content | python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('feedback count:', len\\(d['data']\\)\\)\")",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/health\" -UseBasicParsing -TimeoutSec 3 | Select-Object -ExpandProperty Content)",
+      "PowerShell(cd \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\\\\ai-product-manager\"; $env:PYTHONIOENCODING=\"utf-8\"; python fix_and_seed.py)",
+      "PowerShell($r = Invoke-WebRequest -Uri \"http://localhost:8000/api/v1/insights\" -UseBasicParsing; $d = $r.Content | python -c \"import json,sys; d=json.load\\(sys.stdin\\)['data']; print\\(f'Clusters: {len\\(d[chr\\(99\\)+chr\\(108\\)+chr\\(117\\)+chr\\(115\\)+chr\\(116\\)+chr\\(101\\)+chr\\(114\\)+chr\\(115\\)]\\)} | Opportunities: {len\\(d[chr\\(111\\)+chr\\(112\\)+chr\\(112\\)+chr\\(111\\)+chr\\(114\\)+chr\\(116\\)+chr\\(117\\)+chr\\(110\\)+chr\\(105\\)+chr\\(116\\)+chr\\(105\\)+chr\\(101\\)+chr\\(115\\)]\\)}'\\)\" 2>&1; $r2 = Invoke-WebRequest -Uri \"http://localhost:8000/api/v1/prd\" -UseBasicParsing; $r3 = Invoke-WebRequest -Uri \"http://localhost:8000/api/v1/tickets\" -UseBasicParsing; Write-Host \"PRDs:\" \\($r2.Content | python -c \"import json,sys; print\\(len\\(json.load\\(sys.stdin\\)['data']\\)\\)\" 2>&1\\); Write-Host \"Tickets:\" \\($r3.Content | python -c \"import json,sys; print\\(len\\(json.load\\(sys.stdin\\)['data']\\)\\)\" 2>&1\\))",
+      "PowerShell(Get-Process *)",
+      "PowerShell(Stop-Process *)",
+      "PowerShell(Write-Host \"=== Pipeline Status ===\"; \\(Invoke-WebRequest \"http://localhost:8000/api/v1/pipeline/status\" -UseBasicParsing\\).Content | python -c \"import json,sys; d=json.load\\(sys.stdin\\)['data']; [print\\(f'  {k}: {v}'\\) for k,v in d.items\\(\\)]\")",
+      "PowerShell(Start-Sleep -Seconds 7; $urls = @\\(\"http://localhost:8000/api/v1/pipeline/status\",\"http://localhost:8000/api/v1/insights\",\"http://localhost:8000/api/v1/prd\",\"http://localhost:8000/api/v1/tickets\"\\); foreach \\($url in $urls\\) { $r = Invoke-WebRequest $url -UseBasicParsing; $d = \\($r.Content | ConvertFrom-Json\\); $label = $url.Split\\(\"/\"\\)[-1]; Write-Host \"$label => status:$\\($d.status\\) data_type:$\\($d.data.GetType\\(\\).Name\\)\" })",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3 | Select-Object StatusCode)",
+      "PowerShell($s = \\(Invoke-WebRequest \"http://localhost:8000/api/v1/pipeline/status\" -UseBasicParsing\\).Content | ConvertFrom-Json; $s.data)",
+      "PowerShell(cd \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\\\\ai-product-manager\"; $env:PYTHONIOENCODING=\"utf-8\"; python seed_full_demo.py)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3 | Select-Object StatusCode; Invoke-WebRequest -Uri \"http://localhost:8000/health\" -UseBasicParsing -TimeoutSec 3 | Select-Object -ExpandProperty Content)",
+      "PowerShell(Invoke-WebRequest \"http://127.0.0.1:8000/health\" -UseBasicParsing | Select-Object -ExpandProperty Content; Invoke-WebRequest \"http://127.0.0.1:3000\" -UseBasicParsing | Select-Object StatusCode)",
+      "PowerShell(Start-Process \"http://127.0.0.1:3000/insights\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:3000/feedback\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:3000/roadmap\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:3000/prds\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:3000/tickets\")",
+      "PowerShell(Invoke-WebRequest \"http://127.0.0.1:8000/api/v1/insights\" -UseBasicParsing | Select-Object -ExpandProperty Content | python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('clusters:', len\\(d['data']['clusters']\\), '| opps:', len\\(d['data']['opportunities']\\)\\)\")",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\\\\ai-product-manager\" | Where-Object { !$_.PSIsContainer } | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\Admin\\\\Desktop\\\\Claude code\\\\ai-product-manager\\\\ai-product-manager\\\\\", \"\"\\) } | Where-Object { $_ -notmatch \"node_modules|\\\\.next|__pycache__|\\\\.pyc|ai_pm\\\\.db\" })"
+    ]
+  }
+}
